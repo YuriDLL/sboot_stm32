@@ -175,10 +175,10 @@ Reset_Handler:
     lsrs    r3, 0x02                //PLLRDY -> CF
     bcc     .L_wait_pll
 /* switching SYSCLK from HSI to PLL */
-    movs    r1, 0x02
-    ldrb    r3, [r5, RCC_CFGR + 0x00]
+    ldr     r1, = 0x1002
+    ldr     r3, [r5, RCC_CFGR + 0x00]
     orrs    r3, r1
-    strb    r3, [r5, RCC_CFGR + 0x00]
+    str     r3, [r5, RCC_CFGR + 0x00]
     cbz     r4, .L_start_boot
 
 #if (DFU_BOOTSTRAP_GPIO != _DISABLE)
